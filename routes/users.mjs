@@ -56,6 +56,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Delete user
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -70,6 +71,29 @@ router.delete("/:id", async (req, res) => {
   } catch (error) {
     console.log("The user could not be removed", error);
     res.status(500).json({ error: "The user could not be removed" });
+  }
+});
+
+// Update user
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!req.body)
+      return res.status(500).json({ error: "The user could not be removed" });
+
+    const updatedUser = await db.update(id, req.body);
+
+    if (!updatedUser)
+      return res
+        .status(404)
+        .json({ message: "The user with the specified ID does not exist." });
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.log("The user information could not be modified.", error);
+    res
+      .status(500)
+      .json({ error: "The user information could not be modified." });
   }
 });
 
