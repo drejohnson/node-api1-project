@@ -3,6 +3,7 @@ import db from "../data/db.js";
 
 const router = express.Router();
 
+// Get All Users
 router.get("/", async (req, res) => {
   try {
     const users = await db.find();
@@ -15,6 +16,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get user by ID
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -35,6 +37,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Create new user
 router.post("/", async (req, res) => {
   const { name, bio } = req.body;
   if (!name || !bio)
@@ -50,6 +53,23 @@ router.post("/", async (req, res) => {
     res
       .status(500)
       .json({ error: "The users information could not be retrieved." });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const removed = await db.remove(id);
+    if (!removed)
+      return res
+        .status(404)
+        .json({ message: "The user with the specified ID does not exist." });
+
+    res.status(200).json({ message: "User removed" });
+  } catch (error) {
+    console.log("The user could not be removed", error);
+    res.status(500).json({ error: "The user could not be removed" });
   }
 });
 
