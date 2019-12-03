@@ -88,7 +88,8 @@ router.put("/:id", async (req, res) => {
         .status(404)
         .json({ message: "The user with the specified ID does not exist." });
 
-    res.status(200).json(updatedUser);
+    const user = await db.findById(id);
+    res.status(200).json(user);
   } catch (error) {
     console.log("The user information could not be modified.", error);
     res

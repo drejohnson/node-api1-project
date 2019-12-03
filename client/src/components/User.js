@@ -1,6 +1,10 @@
 import React from "react";
 
 const User = ({ user }) => {
+  const handleDelete = e => {
+    e.preventDefault();
+    console.log(e.target.value);
+  };
   return (
     <div>
       <div>
@@ -9,7 +13,7 @@ const User = ({ user }) => {
       </div>
       <div>
         <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
       </div>
     </div>
   );
