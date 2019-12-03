@@ -18,10 +18,8 @@ const UserList = () => {
     <div>
       <h1>Users</h1>
       <AddUser users={users} setUsers={setUsers} />
-      {users.map(user => (
-        <React.Fragment key={user.id}>
-          <User user={user} />
-        </React.Fragment>
+      {users.map((user, i) => (
+        <User key={user.id + i} user={user} users={users} setUsers={setUsers} />
       ))}
     </div>
   );
