@@ -1,0 +1,36 @@
+GET http://localhost:4000
+
+###
+
+# Get All users
+GET http://localhost:4000/api/users
+
+###
+
+# Get user by ID
+GET http://localhost:4000/api/users/4
+
+###
+
+# Add user
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+  "name": "Gandalf",
+  "bio": "A wise old wizard who always seems to know more than he reveals"
+}
+
+###
+
+# Delete user
+DELETE http://localhost:4000/api/users/3
+
+###
+
+PUT http://localhost:4000/api/users/4
+Content-Type: application/json
+
+{
+  "name": "Gandalf The Grey"
+}
